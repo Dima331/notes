@@ -1,0 +1,103 @@
+ul, li {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0 !important;
+    list-style: none;
+}
+
+.note {
+    position: relative;
+    overflow: hidden;
+}
+
+.color-list {
+    /* position: absolute; */
+    display: flex;
+}
+
+.note__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+}
+
+.color-list__item {
+    margin-right: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.note__text {
+    display: block;
+    height: 100%;
+    width: 100%;
+    resize: none;
+    background-color: #ffc02c;
+    outline: none;
+    background-color: inherit;
+}
+
+.note__content {
+    /* height: 68%; */
+    height: 100%;
+    text-align: left;
+    padding: 0 15px;
+    padding-top: 40px;
+}
+
+.hide-text {
+    position: absolute;
+}
+
+.note {
+    /* height: 400px; */
+    /* width: 360px; */
+    height: 100%;
+    width: 100%;
+    background-color: #ffc02c;
+    /* margin: 0 auto;
+    margin-top: 160px; */
+}
+
+.delete {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    height: 25px !important;
+    width: 25px !important;
+}
+
+.btn-color {
+    border-radius: 50%!important;
+    width: 20px!important;
+    height: 20px!important;
+    padding: 0!important;
+}
+
+.btn-color_pink {
+    background-color: #ff9fee!important;
+    border-color: #818181!important;
+}
+
+.btn-color_blue {
+    background-color: #7577fc!important;
+    border-color: #818181!important;
+}
+
+.btn-color_yellow {
+    background-color: #ffc02c!important;
+    border-color: #818181!important;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+}
+
+.edit {
+    line-height: 1!important;
+    margin-right: 10px;
+}

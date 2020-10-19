@@ -14,9 +14,14 @@
     "react-bootstrap-icons": "^1.0.0",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "1.14.4",
+    "react-draggable": "^4.4.3",
+    "react-markdown": "^4.3.1",
+    "react-resizable": "^1.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-showdown": "^2.1.0",
     "react-tag-autocomplete": "^6.1.0",
+    "showdown": "^1.9.1",
     "socket.io-client": "^2.3.1"
   },
   "scripts": {
