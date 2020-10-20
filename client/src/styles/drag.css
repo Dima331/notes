@@ -36,6 +36,7 @@
     overflow: hidden;
     position: relative;
     margin: 20px;
+    border-radius: 10px;
 }
 
 .box .text {
@@ -136,7 +137,7 @@
 }
 
 .react-resizable {
-    position: relative;
+    position: absolute;
 }
 
 .react-resizable-handle {
