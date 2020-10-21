@@ -1,34 +1,19 @@
 const express = require('express');
 const mysql = require("mysql2");
 const app = express();
-
-// const server = app.listen(5000)
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-app.use(express.json());
-
-// app.use(bodyParser.json({ 'type': 'application/json' }));
-// app.use(bodyParser.urlencoded({ 'extended': true }));
-// const PORT = config.get('port') || 5000;
-// const rooms = require('./routes/rooms.routes');
-// app.use('/api/rooms', rooms);
-
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "manager",
-  password: "root"
-});
-
-// db.connect((err) => {
-//   if (err) { throw err; }
-//   console.log('Connected to database');
-// });
-
-// global.db = db;
-
 const note = require('./routes/notes.routes');
+const bodyParser = require('body-parser');
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+const path = require('path');
+
+const buildPath = path.join(__dirname, '..', 'build');
+app.use(express.static(buildPath));
+app.use(bodyParser.json({ 'type': 'application/json' }));
+app.use(bodyParser.urlencoded({ 'extended': true }));
 app.use('/api/notes', note);
+const PORT = process.env.PORT || 3000;
+
 
 io.on('connection', (socket) => {
   console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>connected');
@@ -89,19 +74,18 @@ io.on('connection', (socket) => {
   })
 });
 
-// const db = mysql.createPool({
-//   connectionLimit : 30,
-//   host: "eu-cdbr-west-03.cleardb.net",
-//   user: "b7d5fcc0dab453",
-//   database: "heroku_834f816ce945ec4",
-//   password: "fc773d3c"
-// });
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
+})
+
+const db = mysql.createPool({
+  connectionLimit : 30,
+  host: "eu-cdbr-west-03.cleardb.net",
+  user: "b7d5fcc0dab453",
+  database: "heroku_834f816ce945ec4",
+  password: "fc773d3c"
+});
 
 global.db = db;
-// app.listen(PORT, () => console.log(`here port ${PORT}`));
-server.listen(9090, (err) => {
-  if (err) {
-    throw Error(err);
-  }
-  console.log('Сервер запущен!');
-});
+
+server.listen(process.env.PORT || 3000);
