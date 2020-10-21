@@ -183,9 +183,9 @@ export const Note = () => {
       return item;
     }
     ));
-
     setNotes(prev => {
       socket.emit('CHANGE_INDEX', notes[position]);
+      socket.emit('CHANGE_NOTE', notes[position]);
       return prev;
     });
     setZindex(prev => ++prev);
@@ -225,7 +225,6 @@ export const Note = () => {
       return item;
     }
     ));
-    socket.emit('CHANGE_NOTE', notes[position]);
   };
 
   const handleDrag = (e, note) => {

@@ -39,6 +39,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('CHANGE_TEXT', (note) => {
+    if(note){
     const indexChangeQuery = "UPDATE notes SET text=? WHERE name=?";
 
     db.query(indexChangeQuery, [note.text, note.name], (err, data) => {
@@ -47,7 +48,7 @@ io.on('connection', (socket) => {
     note.textEdit = false;
     note.show = false;
     socket.broadcast.emit('SET_CHANGE_TEXT', note);
-  })
+  }})
 
   socket.on('CHANGE_INDEX', (note) => {
     if(note){
@@ -61,7 +62,8 @@ io.on('connection', (socket) => {
   })
 
   socket.on('CHANGE_NOTE', (note) => {
-    const noteChangeQuery = "UPDATE notes SET name=?, active_color=?, text=?, text_edit=?, z_index=?, width=?, height=?, defX=?, defY=?, x=?, y=? WHERE name=?";
+    if(note){
+      const noteChangeQuery = "UPDATE notes SET name=?, active_color=?, text=?, text_edit=?, z_index=?, width=?, height=?, defX=?, defY=?, x=?, y=? WHERE name=?";
 
     db.query(noteChangeQuery, [note.name, note.active_color, note.text, note.text_edit, note.z_index,
     note.width, note.height, note.defX, note.defY, note.x, note.y, note.name], (err, data) => {
@@ -71,7 +73,7 @@ io.on('connection', (socket) => {
     note.textEdit = false;
     note.show = false;
     socket.broadcast.emit('SET_NOTE', note);
-  })
+  }})
 });
 
 app.get('*', function (request, response){
