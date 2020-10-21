@@ -172,6 +172,23 @@ export const Note = () => {
     ));
   };
 
+  const sendResizeHandler = (e, note) => {
+    let position;
+
+    setNotes(prev => prev.map((item, i) => {
+      if (item.name === note.name) {
+        item.z_index = zIndex;
+        position = i;
+      }
+      return item;
+    }
+    ));
+    setNotes(prev => {
+      socket.emit('CHANGE_NOTE', notes[position]);
+      return prev;
+    });
+  }
+
   const indexHandler = (e, note) => {
     let position;
 
@@ -189,7 +206,6 @@ export const Note = () => {
       return prev;
     });
     setZindex(prev => ++prev);
-    setActiveNote(note);
   };
 
   const showOver = (note) => {
@@ -281,6 +297,7 @@ export const Note = () => {
             position={{ x: note.x, y: note.y }}
             defaultPosition={{ x: note.x, y: note.y }}
             onStop={onControlledDragStop}
+            onMouseDown={(e) => indexHandler(e, note)}
           >
             <ResizableBox
               onResize={onResize}
@@ -292,7 +309,7 @@ export const Note = () => {
               onMouseOver={() => showOver(note)}
               onMouseOut={() => showOut(note)}
               minConstraints={[205, 255]}
-              onClick={(e) => indexHandler(e, note)}
+              onClick={(e) => sendResizeHandler(e, note)}
             >
               <div
                 className='note'
